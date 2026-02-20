@@ -141,12 +141,14 @@ Frontend will run on: `http://localhost:3000`
 
 ---
 
-## 🧠 Sentiment Analysis
+##  Sentiment Analysis
 
-Uses **TextBlob** for sentiment analysis:
-- **Polarity > 0.1** → Positive
-- **Polarity < -0.1** → Negative
-- **-0.1 ≤ Polarity ≤ 0.1** → Neutral
+Uses **Logistic Regression** for emotion detection:
+- Trained on **EmotionDetection.csv** dataset
+- Supports **13 emotion classes**: anger, boredom, empty, enthusiasm, fun, happiness, hate, love, neutral, relief, sadness, surprise, worry
+- Text vectorized using **TF-IDF** (5000 features, bigrams)
+- Dataset split: **80% training / 20% testing**
+- Returns predicted **emotion label** + **confidence score**
 
 ---
 
