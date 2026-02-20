@@ -1,14 +1,14 @@
 # 🎭 Feedback Sentiment Analysis Application
 
-A full-stack application built with Flask (backend) and React (frontend) that collects user feedback and performs AI-powered sentiment analysis.
+A full-stack application built with Flask (backend) and React (frontend) that collects user feedback and performs AI-powered emotion sentiment analysis.
 
 ## ✨ Features
 
-- **User Authentication**: Sign up and sign in functionality
-- **Feedback Collection**: Rating system (1-5 stars) + text comments
-- **AI Sentiment Analysis**: Automatic emotion detection (Positive/Neutral/Negative)
-- **Admin Dashboard**: Complete analytics with sentiment breakdown
-- **Modern UI**: Beautiful gradient design with animations
+- **User Authentication** — Sign up and sign in functionality
+- **Feedback Collection** — Rating system (1-5 stars) + text comments
+- **AI Sentiment Analysis** — Automatic emotion detection using Logistic Regression
+- **Admin Dashboard** — Complete analytics with emotion breakdown and filters
+- **Modern UI** — Beautiful gradient design with animations and glassmorphism
 
 ---
 
@@ -16,8 +16,9 @@ A full-stack application built with Flask (backend) and React (frontend) that co
 
 **Backend:**
 - Flask (Python web framework)
-- SQLite (Database)
-- Logistic Regression
+- SQLite (Database — auto created on first run)
+- Logistic Regression + TF-IDF (scikit-learn)
+- Joblib (model serialization)
 
 **Frontend:**
 - React 18
@@ -29,22 +30,25 @@ A full-stack application built with Flask (backend) and React (frontend) that co
 
 ## 📦 Installation
 
-### Backend Setup
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/abhiiinay/feedback-sentiment.git
+cd feedback-sentiment/feedback-sentiment-app
+```
+
+---
+
+### 2. Backend Setup
 
 ```bash
 cd backend
 
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
 # Install dependencies
 pip install -r requirements.txt
+
+# Train the emotion model (required before running the server)
+python train_model.py EmotionDetection.csv
 
 # Run the server
 python app.py
@@ -52,12 +56,20 @@ python app.py
 
 Backend will run on: `http://localhost:5000`
 
+You should see:
+```
+✅ Database initialized
+🚀 Server running on http://localhost:5000
+```
+
 ---
 
-### Frontend Setup
+### 3. Frontend Setup
+
+Open a **new terminal** and run:
 
 ```bash
-cd frontend
+cd feedback-sentiment/feedback-sentiment-app/frontend
 
 # Install dependencies
 npm install
@@ -73,24 +85,35 @@ Frontend will run on: `http://localhost:3000`
 
 ---
 
+## 🔑 Admin Credentials
+
+| Field    | Value      |
+|----------|------------|
+| Username | `admin`    |
+| Password | `admin123` |
+
+Navigate to `http://localhost:3000/admin` to access the admin portal.
+
+---
+
 ## 🚀 Usage
 
-### 1. **User Flow**
-1. Sign up with username, email, and password
-2. Sign in with credentials
-3. Submit feedback with rating and comment
-4. View sentiment analysis result
+### User Flow
+1. Go to `http://localhost:3000`
+2. Sign up with username, email, and password
+3. Sign in with your credentials
+4. Submit feedback with a star rating and comment
+5. View the detected emotion and confidence score
 
-### 2. **Admin Flow**
-1. Navigate to `/admin`
-2. Login with credentials:
-   - Username: `admin`
-   - Password: `admin123`
-3. View dashboard with:
+### Admin Flow
+1. Navigate to `http://localhost:3000/admin`
+2. Login with `admin` / `admin123`
+3. View the dashboard with:
    - Total feedback count
    - Average rating
-   - Sentiment breakdown (Positive/Neutral/Negative)
-   - Individual feedback with sentiment scores
+   - Emotion distribution breakdown
+   - Filter feedback by emotion
+   - Individual feedback with confidence scores
 
 ---
 
@@ -102,46 +125,11 @@ Frontend will run on: `http://localhost:3000`
 | `/api/signin` | POST | User authentication |
 | `/api/feedback` | POST | Submit feedback |
 | `/api/admin/login` | POST | Admin authentication |
-| `/api/admin/dashboard` | GET | Get all feedback & stats |
+| `/api/admin/dashboard` | GET | Get all feedback and stats |
 
 ---
 
-## 🎨 Design Features
-
-- Animated gradient backgrounds
-- Floating blob animations
-- Glass-morphism cards
-- Responsive design
-- Dark mode admin panel
-- Color-coded sentiment badges
-
----
-
-## 📝 Database Schema
-
-**Users Table:**
-```sql
-- id (PRIMARY KEY)
-- username (UNIQUE)
-- email (UNIQUE)
-- password (hashed)
-- created_at (TIMESTAMP)
-```
-
-**Feedback Table:**
-```sql
-- id (PRIMARY KEY)
-- user_id (FOREIGN KEY)
-- rating (1-5)
-- comment (TEXT)
-- sentiment (Positive/Neutral/Negative)
-- sentiment_score (REAL)
-- created_at (TIMESTAMP)
-```
-
----
-
-##  Sentiment Analysis
+## 🧠 Sentiment Analysis
 
 Uses **Logistic Regression** for emotion detection:
 - Trained on **EmotionDetection.csv** dataset
@@ -152,45 +140,61 @@ Uses **Logistic Regression** for emotion detection:
 
 ---
 
+## 📝 Database Schema
+
+**Users Table:**
+```sql
+- id           (PRIMARY KEY)
+- username     (UNIQUE)
+- email        (UNIQUE)
+- password     (SHA-256 hashed)
+- created_at   (TIMESTAMP)
+```
+
+**Feedback Table:**
+```sql
+- id              (PRIMARY KEY)
+- user_id         (FOREIGN KEY → users.id)
+- rating          (1–5)
+- comment         (TEXT)
+- sentiment       (emotion label)
+- sentiment_score (confidence 0.0–1.0)
+- created_at      (TIMESTAMP)
+```
+
+---
+
+## 🎨 Design Features
+
+- Animated gradient backgrounds
+- Floating blob animations
+- Glassmorphism cards
+- Responsive layout
+- Dark mode admin panel
+- Color-coded emotion badges
+
+---
+
 ## 🔒 Security Features
 
 - Password hashing (SHA-256)
-- Email validation
+- Email format validation
 - Input sanitization
 - CORS enabled for local development
 
 ---
 
-## 📸 Screenshots
-
-### User Flow
-- Sign Up / Sign In pages
-- Feedback form with star ratings
-- Sentiment result display
-
-### Admin Login
--Username: admin
-
--Password: admin123
-
-### Admin Dashboard
-- Stats overview cards
-- Sentiment filters
-- Complete feedback table
-
----
-
 ## 🛠️ Development Notes
 
-- Backend runs on port 5000
-- Frontend runs on port 3000
-- Database file: `feedback.db` (auto-created)
-- Static admin credentials for demo purposes
+- Backend runs on **port 5000**
+- Frontend runs on **port 3000**
+- Database file `feedback.db` is **auto-created** on first run — no setup needed
+- Model file `sentiment_model.pkl` is generated by running `train_model.py`
+- Admin credentials are static for demo purposes
+- Both backend and frontend must be running at the same time
 
 ---
-
-
 
 ## 👨‍💻 Author
 
-Built with  Flask & React
+Built with Flask & React
