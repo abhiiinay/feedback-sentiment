@@ -168,6 +168,7 @@ Uses **TextBlob** for sentiment analysis:
 
 ### Admin Login
 -Username: admin
+
 -Password: admin123
 
 ### Admin Dashboard
@@ -186,11 +187,7 @@ Uses **TextBlob** for sentiment analysis:
 
 ---
 
-## 📄 License
 
-This project is created for a screening test demonstration.
-
----
 
 ## 👨‍💻 Author
 
