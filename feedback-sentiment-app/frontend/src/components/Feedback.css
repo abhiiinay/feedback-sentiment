@@ -1,0 +1,264 @@
+/* Feedback Form Styling */
+
+.feedback-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.feedback-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 48px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.feedback-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.feedback-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #1a1a2e;
+}
+
+.feedback-header p {
+  color: #64748b;
+  font-size: 15px;
+  margin: 0;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Rating Stars */
+.rating-stars {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #e2e8f0;
+  transition: all 0.2s;
+  padding: 4px;
+}
+
+.star:hover,
+.star.active {
+  color: #fbbf24;
+  transform: scale(1.1);
+}
+
+.rating-text {
+  text-align: center;
+  min-height: 24px;
+}
+
+.rating-label {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Textarea */
+textarea {
+  padding: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  background: #f8fafc;
+  transition: all 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.char-count {
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: right;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.primary-button,
+.secondary-button {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: #f1f5f9;
+  color: #475569;
+  border: 2px solid #e2e8f0;
+}
+
+.secondary-button:hover {
+  background: #e2e8f0;
+}
+
+.error-message {
+  padding: 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Result Card */
+.result-card {
+  text-align: center;
+}
+
+.result-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 50%;
+  color: white;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+}
+
+.result-card h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1a1a2e;
+}
+
+.result-card p {
+  color: #64748b;
+  font-size: 16px;
+  margin: 0 0 32px 0;
+}
+
+.sentiment-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.sentiment-badge {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sentiment-badge[data-sentiment="positive"] {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.sentiment-badge[data-sentiment="neutral"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.sentiment-badge[data-sentiment="negative"] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.sentiment-score {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .feedback-card {
+    padding: 32px 24px;
+  }
+  
+  .form-actions,
+  .result-actions {
+    flex-direction: column;
+  }
+}

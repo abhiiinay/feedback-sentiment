@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Flask
+instance/
+.env
+*.db
+*.sqlite
+feedback.db
+sentiment_model.pkl
+
+# Node
+node_modules/
+npm-debug.log*
+/frontend/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dataset
+# *.csv
+# EmotionDetection.csv
